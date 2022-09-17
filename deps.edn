@@ -8,7 +8,10 @@
   aero/aero                         {:mvn/version "1.1.6"}
   migratus/migratus                 {:mvn/version "1.4.4"}}
 
+ :paths ["src/clj"]
+
  :aliases {:test
            {:main-opts ["-m" "kaocha.runner"]
             :extra-deps
-            {lambdaisland/kaocha {:mvn/version "1.69.1069"}}}}}
+            {lambdaisland/kaocha {:mvn/version "1.69.1069"}}
+            :extra-paths ["test"]}}}
