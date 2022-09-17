@@ -1,0 +1,14 @@
+{:deps
+ {org.clojure/clojure               {:mvn/version "1.11.1"}
+  http-kit/http-kit                 {:mvn/version "2.6.0"}
+  metosin/reitit                    {:mvn/version "0.5.18"}
+  com.github.seancorfield/next.jdbc {:mvn/version "1.2.796"}
+  org.postgresql/postgresql         {:mvn/version "42.3.1"}
+  ring/ring-mock                    {:mvn/version "0.4.0"}
+  aero/aero                         {:mvn/version "1.1.6"}
+  migratus/migratus                 {:mvn/version "1.4.4"}}
+
+ :aliases {:test
+           {:main-opts ["-m" "kaocha.runner"]
+            :extra-deps
+            {lambdaisland/kaocha {:mvn/version "1.69.1069"}}}}}
