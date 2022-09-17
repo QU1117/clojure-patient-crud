@@ -1,10 +1,14 @@
 (ns patients.core
-  (:require [org.httpkit.server :as server]))
+  (:require [org.httpkit.server :as server]
+            [reitit.ring :as ring]
+            [patients.handlers :refer [get-patients]]))
 
 (def server-state (atom nil))
 
 (def app
-  (println "Hello world"))
+  (ring/ring-handler
+   (ring/router
+    [["/patients/" get-patients]])))
 
 (defn -main []
   (reset! server-state (server/run-server app {:port 4000})))
