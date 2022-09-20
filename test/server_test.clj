@@ -8,3 +8,10 @@
 
 (deftest patients-root-redirect-test
   (is (= 301 (:status (app (mock/request :get "/patients"))))))
+
+(deftest create-patient-test
+  (is (= 201 (:status (-> (mock/request :post "/patients/")
+                          (mock/json-body {:first_name "Jack"
+                                           :last_name "Reacher"
+                                           :email "reacher@mail.com"})
+                          app)))))
