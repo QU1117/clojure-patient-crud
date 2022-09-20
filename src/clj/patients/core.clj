@@ -8,7 +8,9 @@
 (def app
   (ring/ring-handler
    (ring/router
-    [["/patients/" get-patients]])))
+    [["/patients/" get-patients]])
+   (ring/routes
+    (ring/redirect-trailing-slash-handler))))
 
 (defn -main []
   (reset! server-state (server/run-server app {:port 4000})))
