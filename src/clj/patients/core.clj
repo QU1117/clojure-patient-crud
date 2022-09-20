@@ -1,14 +1,29 @@
 (ns patients.core
   (:require [org.httpkit.server :as server]
             [reitit.ring :as ring]
-            [patients.routes :refer [patients-route]]))
+            [reitit.ring.coercion :refer [coerce-request-middleware
+                                          coerce-response-middleware
+                                          coerce-exceptions-middleware]]
+            [reitit.coercion]
+            [reitit.coercion.schema :as r.coercion]
+            [patients.routes :refer [patients-route]]
+            [muuntaja.core :as m]
+            [reitit.ring.middleware.muuntaja :refer [format-middleware]]))
 
 (def server-state (atom nil))
 
 (def app
   (ring/ring-handler
    (ring/router
-    [["/api" patients-route]])
+    [["/api" patients-route]]
+    {:data {:coercion r.coercion/coercion
+            :compile reitit.coercion/compile-request-coercers
+            :muuntaja m/instance
+            :middleware [format-middleware
+                         coerce-request-middleware
+                         coerce-response-middleware
+                         coerce-exceptions-middleware]}})
+   
    (ring/routes
     (ring/redirect-trailing-slash-handler))))
 
