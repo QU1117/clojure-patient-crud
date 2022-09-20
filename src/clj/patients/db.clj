@@ -32,3 +32,7 @@
                           :address address
                           :chi_number chi_number}
                {:builder-fn rs/as-unqualified-maps}))
+
+(defn read-all-records [_]
+  (jdbc/execute! ds ["SELECT * FROM patients"]
+                 {:builder-fn rs/as-unqualified-maps}))

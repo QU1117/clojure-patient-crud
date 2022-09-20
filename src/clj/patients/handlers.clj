@@ -3,7 +3,7 @@
 
 (defn get-patients [_]
   {:status 200
-   :body "Hello world"})
+   :body (db/read-all-records db/ds)})
 
 (defn create-patient
   [{:keys [parameters]}]
