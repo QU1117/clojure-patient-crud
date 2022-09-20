@@ -1,14 +1,14 @@
 (ns patients.core
   (:require [org.httpkit.server :as server]
             [reitit.ring :as ring]
-            [patients.handlers :refer [get-patients]]))
+            [patients.routes :refer [patients-route]]))
 
 (def server-state (atom nil))
 
 (def app
   (ring/ring-handler
    (ring/router
-    [["/patients/" get-patients]])
+    [["/api" patients-route]])
    (ring/routes
     (ring/redirect-trailing-slash-handler))))
 
