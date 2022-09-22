@@ -25,3 +25,17 @@
       
       {:status 200
        :body data})))
+
+(defn delete-patient-by-id
+  [{:keys [parameters]}]
+  (let [id (get-in parameters [:path :id])
+        deleted-patient (db/read-record-by-id id)]
+    (if (empty? deleted-patient)
+      {:status 410
+       :body "Contact doesn't exist"}
+
+      (do
+        (db/delete-record-by-id id)
+        {:status 200
+         :body {:deleted true
+                :contact deleted-patient}}))))
