@@ -44,7 +44,6 @@
                                            :chi_number 6428269083928614})
                           app)))))
 
-(deftest delete-contact-test
-  (is (= 200 (:status (-> (mock/request :delete "/api/contacts/2")
+(deftest delete-patient-record-test
+  (is (= 200 (:status (-> (mock/request :delete "/api/patients/2")
                           app)))))
-
