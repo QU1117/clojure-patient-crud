@@ -1,7 +1,8 @@
 (ns patients.routes
   (:require [patients.handlers :refer [get-patients
                                        create-patient
-                                       update-patient-by-id]]
+                                       update-patient-by-id
+                                       delete-patient-record-by-id]]
             [schema.core :as schema]))
 
 (def patients-route
