@@ -58,9 +58,9 @@
 
 (defn read-record-by-id [id]
   (sql/get-by-id ds
-                 :contacts
+                 :patients
                  id
                  {:builder-fn rs/as-unqualified-maps}))
 
 (defn delete-record-by-id [id]
-  (sql/delete! ds :contacts {:id id}))
+  (sql/delete! ds :patients {:id id}))
