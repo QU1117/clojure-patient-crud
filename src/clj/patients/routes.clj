@@ -18,6 +18,7 @@
                                     :chi_number schema/Int}}}}]
    
    ["/:id" {:parameters {:path {:id schema/Int}}
+            :get get-patient-record-by-id
             :patch {:handler update-patient-by-id
                     :parameters {:body {:first_name schema/Str
                                         :middle_name schema/Str
