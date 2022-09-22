@@ -36,3 +36,22 @@
 (defn read-all-records [_]
   (jdbc/execute! ds ["SELECT * FROM patients"]
                  {:builder-fn rs/as-unqualified-maps}))
+
+(defn update-record-by-id
+  [{:keys [id
+           first_name
+           middle_name
+           last_name
+           gender
+           date_of_birth
+           address
+           chi_number]}]
+  (sql/update! ds
+               :patients {:first_name first_name
+                          :middle_name middle_name
+                          :last_name last_name
+                          :gender gender
+                          :date_of_birth (types/as-date date_of_birth)
+                          :address address
+                          :chi_number chi_number}
+               {:id id}))
