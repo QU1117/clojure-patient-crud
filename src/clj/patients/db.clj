@@ -55,3 +55,9 @@
                           :address address
                           :chi_number chi_number}
                {:id id}))
+
+(defn read-record-by-id [id]
+  (sql/get-by-id ds
+                 :contacts
+                 id
+                 {:builder-fn rs/as-unqualified-maps}))
