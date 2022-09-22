@@ -30,3 +30,16 @@
                                            :address "Eternia, Snake Mountain"
                                            :chi_number 9876543210987654})
                           app)))))
+
+(deftest update-patient-test
+  (is (= 200 (:status (-> (mock/request :put "/api/patients/1")
+                          (mock/json-body {:first_name "Lynn"
+                                           :middle_name "Ann"
+                                           :last_name "Conway"
+                                           :gender "female"
+                                           :date_of_birth "1938-01-02"
+                                           :address "(517) 524-6494
+                                           14180 Howard Rd
+                                           Concord, Michigan(MI), 49237"
+                                           :chi_number 6428269083928614})
+                          app)))))
