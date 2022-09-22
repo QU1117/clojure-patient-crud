@@ -31,18 +31,23 @@
                                            :chi_number 9876543210987654})
                           app)))))
 
-(deftest update-patient-test
-  (is (= 200 (:status (-> (mock/request :patch "/api/patients/1")
-                          (mock/json-body {:first_name "Lynn"
-                                           :middle_name "Ann"
-                                           :last_name "Conway"
-                                           :gender "female"
-                                           :date_of_birth "1938-01-02"
-                                           :address "(517) 524-6494
+(testing "Read/Update by ID: "
+  (testing "Read"
+    (is (= 200 (:status (-> (mock/request :get "/api/patients/1")
+                            app)))))
+  
+  (testing "Update"
+    (is (= 200 (:status (-> (mock/request :patch "/api/patients/1")
+                            (mock/json-body {:first_name "Lynn"
+                                             :middle_name "Ann"
+                                             :last_name "Conway"
+                                             :gender "female"
+                                             :date_of_birth "1938-01-02"
+                                             :address "(517) 524-6494
                                            14180 Howard Rd
                                            Concord, Michigan(MI), 49237"
-                                           :chi_number 6428269083928614})
-                          app)))))
+                                             :chi_number 6428269083928614})
+                            app))))))
 
 (deftest delete-patient-record-test
   (is (= 200 (:status (-> (mock/request :delete "/api/patients/2")
