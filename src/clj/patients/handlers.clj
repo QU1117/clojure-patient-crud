@@ -26,7 +26,7 @@
       {:status 200
        :body data})))
 
-(defn delete-patient-by-id
+(defn delete-patient-record-by-id
   [{:keys [parameters]}]
   (let [id (get-in parameters [:path :id])
         deleted-patient (db/read-record-by-id id)]
