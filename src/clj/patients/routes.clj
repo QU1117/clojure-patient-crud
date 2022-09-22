@@ -24,4 +24,5 @@
                                         :gender schema/Str
                                         :date_of_birth schema/Str
                                         :address schema/Str
-                                        :chi_number schema/Int}}}}]])
+                                        :chi_number schema/Int}}}
+            :delete delete-patient-record-by-id}]])
