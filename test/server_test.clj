@@ -32,7 +32,7 @@
                           app)))))
 
 (deftest update-patient-test
-  (is (= 200 (:status (-> (mock/request :put "/api/patients/1")
+  (is (= 200 (:status (-> (mock/request :patch "/api/patients/1")
                           (mock/json-body {:first_name "Lynn"
                                            :middle_name "Ann"
                                            :last_name "Conway"
