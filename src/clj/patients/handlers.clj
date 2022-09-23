@@ -31,7 +31,7 @@
   (let [id (get-in parameters [:path :id])
         deleted-patient (db/read-record-by-id id)]
     (if (empty? deleted-patient)
-      {:status 410
+      {:status 404
        :body "Contact doesn't exist"}
 
       (do
