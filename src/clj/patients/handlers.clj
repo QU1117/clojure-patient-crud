@@ -39,3 +39,14 @@
         {:status 200
          :body {:deleted true
                 :contact deleted-patient}}))))
+
+(defn get-patient-record-by-id
+  [{:keys [parameters]}]
+  (let [id (get-in parameters [:path :id])
+        contact (db/read-record-by-id id)]
+    (if (nil? contact)
+        {:status 404
+         :body "Contact not found"}
+
+        {:status 200
+         :body contact})))
