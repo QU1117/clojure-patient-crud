@@ -3,9 +3,7 @@
             [patients.core :refer [app]]
             [patients.db :refer [migration-config]]
             [ring.mock.request :as mock]
-            [migratus.core :as migratus]
-            [muuntaja.core :as m]
-            [next.jdbc.types :as types]))
+            [migratus.core :as migratus]))
 
 (defn database-fixture
   [f]
@@ -57,4 +55,8 @@
 
 (deftest invalid-route-test
   (is (= 404 (:status (-> (mock/request :get "/invalidroute")
+                          app)))))
+
+(deftest delete-nonexistent-contact
+  (is (= 404 (:status (-> (mock/request :delete "/api/contacts/-1")
                           app)))))
