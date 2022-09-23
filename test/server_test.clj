@@ -3,7 +3,9 @@
             [patients.core :refer [app]]
             [patients.db :refer [migration-config]]
             [ring.mock.request :as mock]
-            [migratus.core :as migratus]))
+            [migratus.core :as migratus]
+            [muuntaja.core :as m]
+            [next.jdbc.types :as types]))
 
 (defn database-fixture
   [f]
@@ -31,11 +33,11 @@
                                            :chi_number 9876543210987654})
                           app)))))
 
-(testing "Read/Update by ID: "
+(deftest read-and-update-patient-record-by-id-test
   (testing "Read"
     (is (= 200 (:status (-> (mock/request :get "/api/patients/1")
                             app)))))
-  
+
   (testing "Update"
     (is (= 200 (:status (-> (mock/request :patch "/api/patients/1")
                             (mock/json-body {:first_name "Lynn"
