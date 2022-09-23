@@ -54,3 +54,7 @@
 (deftest delete-patient-record-test
   (is (= 200 (:status (-> (mock/request :delete "/api/patients/2")
                           app)))))
+
+(deftest invalid-route-test
+  (is (= 404 (:status (-> (mock/request :get "/invalidroute")
+                          app)))))
