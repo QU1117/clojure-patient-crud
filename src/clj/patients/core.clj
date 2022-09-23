@@ -25,7 +25,10 @@
                          coerce-exceptions-middleware]}})
    
    (ring/routes
-    (ring/redirect-trailing-slash-handler))))
+    (ring/redirect-trailing-slash-handler)
+    (ring/create-default-handler
+     {:not-found (constantly {:status 404
+                              :body "Route not found"})}))))
 
 (defn -main []
   (reset! server-state (server/run-server app {:port 4000})))
