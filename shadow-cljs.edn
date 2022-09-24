@@ -1,0 +1,12 @@
+;; shadow-cljs configuration
+{:source-paths ["src/cljs"]
+
+ :dev-http {8081 "resources/public"}
+
+ :dependencies [[reagent "1.1.1"]]
+
+ :builds
+ {:app {:target :browser
+        :output-dir "resources/public/js/"
+        :asset-path "/js/"
+        :modules {:core {:init-fn patients.core/run}}}}}
