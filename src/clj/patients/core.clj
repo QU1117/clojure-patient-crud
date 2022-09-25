@@ -36,7 +36,8 @@
                               :body "Route not found"})}))))
 
 (defn -main []
-  (reset! server-state (server/run-server app {:port 4000})))
+  (reset! server-state (server/run-server app {:port 4000}))
+  (println "Server running at http://localhost:4000"))
 
 (defn stop-server [server]
   (when-not (nil? server)
