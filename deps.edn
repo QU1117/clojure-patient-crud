@@ -15,4 +15,7 @@
            {:main-opts ["-m" "kaocha.runner"]
             :extra-deps
             {lambdaisland/kaocha {:mvn/version "1.69.1069"}}
-            :extra-paths ["test"]}}}
+            :extra-paths ["test"]}
+           
+           :run
+           {:main-opts ["-m" "patients.core"]}}}
