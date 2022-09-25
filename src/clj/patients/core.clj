@@ -8,7 +8,8 @@
             [reitit.coercion.schema :as r.coercion]
             [patients.routes :refer [patients-route]]
             [muuntaja.core :as m]
-            [reitit.ring.middleware.muuntaja :refer [format-middleware]]))
+            [reitit.ring.middleware.muuntaja :refer [format-middleware]]
+            [ring.middleware.cors :refer [wrap-cors]]))
 
 (def server-state (atom nil))
 
@@ -16,13 +17,17 @@
   (ring/ring-handler
    (ring/router
     [["/api" patients-route]]
-    {:data {:coercion r.coercion/coercion
-            :compile reitit.coercion/compile-request-coercers
-            :muuntaja m/instance
-            :middleware [format-middleware
-                         coerce-request-middleware
-                         coerce-response-middleware
-                         coerce-exceptions-middleware]}})
+    {:data
+     {:coercion r.coercion/coercion
+      :compile reitit.coercion/compile-request-coercers
+      :muuntaja m/instance
+      :middleware [[wrap-cors
+                    :access-control-allow-origin [#"http://localhost:8081"]
+                    :access-control-allow-methods [:get :post :patch :delete]]
+                   format-middleware
+                   coerce-request-middleware
+                   coerce-response-middleware
+                   coerce-exceptions-middleware]}})
    
    (ring/routes
     (ring/redirect-trailing-slash-handler)
