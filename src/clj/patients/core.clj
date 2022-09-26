@@ -9,7 +9,7 @@
             [patients.routes :refer [patients-route]]
             [muuntaja.core :as m]
             [reitit.ring.middleware.muuntaja :refer [format-middleware]]
-            [ring.middleware.cors :refer [wrap-cors]]))
+            [jumblerg.middleware.cors :refer [wrap-cors]]))
 
 (def server-state (atom nil))
 
@@ -21,9 +21,7 @@
      {:coercion r.coercion/coercion
       :compile reitit.coercion/compile-request-coercers
       :muuntaja m/instance
-      :middleware [[wrap-cors
-                    :access-control-allow-origin [#"http://localhost:8081"]
-                    :access-control-allow-methods [:get :post :patch :delete]]
+      :middleware [[wrap-cors #"http://localhost:8081"]
                    format-middleware
                    coerce-request-middleware
                    coerce-response-middleware
