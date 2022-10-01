@@ -3,15 +3,27 @@
             [reagent.dom :as rdom]
             [ajax.core :as ajax]))
 
-(def patient-state (atom nil))
+(defonce patient-state (r/atom nil))
 
 (defn header []
-  [:header
+  [:header.main-header
    [:h1 "Patients"]
    [:hr]])
 
-(defn app []
-  [header])
+(defn patient-list []
+  (ajax/GET "http://localhost:4000/api/patients/"
+            {:handler (fn [resp]
+                        (reset! patient-state resp))})
+  [:ul
+   (for [patient @patient-state]
+     [:li {:key (:id patient)}
+      [:p (:first_name patient)]])])
 
-(defn ^:export run []
+(defn app []
+  [:<>
+   [header]
+   [:div.main-container
+    [patient-list]]])
+
+(defn ^:export ^:dev/after-load run []
   (rdom/render [app] (js/document.getElementById "root")))
