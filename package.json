@@ -6,7 +6,7 @@
     "tailwindcss": "^3.1.8"
   },
   "scripts": {
-    "shadow-watch": "npx shadow-cljs watch app",
-    "tailwind-build": "npx tailwindcss -i ./src/input.css -o ./resources/public/output.css"
+    "sh-w": "npx shadow-cljs watch app",
+    "tw-b": "npx tailwindcss -i ./src/input.css -o ./resources/public/output.css"
   }
 }
