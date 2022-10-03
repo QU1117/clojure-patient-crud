@@ -1,14 +1,10 @@
 (ns patients.core
   (:require [reagent.core :as r]
             [reagent.dom :as rdom]
-            [ajax.core :as ajax]))
+            [ajax.core :as ajax]
+            [patients.components.header :refer [header]]))
 
 (defonce patient-state (r/atom nil))
-
-(defn header []
-  [:header.main-header
-   [:h1 "Patients"]
-   [:hr]])
 
 (defn patient-list []
   (ajax/GET "http://localhost:4000/api/patients/"
