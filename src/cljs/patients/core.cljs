@@ -1,25 +1,10 @@
 (ns patients.core
-  (:require [reagent.core :as r]
-            [reagent.dom :as rdom]
-            [ajax.core :as ajax]
+  (:require [reagent.dom :as rdom]
             [patients.components.header :refer [header]]))
-
-(defonce patient-state (r/atom nil))
-
-(defn patient-list []
-  (ajax/GET "http://localhost:4000/api/patients/"
-            {:handler (fn [resp]
-                        (reset! patient-state resp))})
-  [:ul
-   (for [patient @patient-state]
-     [:li {:key (:id patient)}
-      [:p (:first_name patient)]])])
 
 (defn app []
   [:<>
-   [header]
-   [:div.main-container
-    [patient-list]]])
+   [header]])
 
 (defn ^:export ^:dev/after-load run []
   (rdom/render [app] (js/document.getElementById "root")))
