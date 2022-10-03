@@ -1,14 +1,12 @@
 (ns patients.components.main-container
-  (:require [reagent.core :as r]
-            [ajax.core :as ajax]))
+  (:require [patients.components.patient :refer [patient-row]]))
 
-(defonce patient-state (r/atom nil))
-
-(defn patient-list []
-  (ajax/GET "http://localhost:4000/api/patients/"
-            {:handler (fn [resp]
-                        (reset! patient-state resp))})
+(defn patient-list [patients]
   [:ul
-   (for [patient @patient-state]
+   (for [patient @patients]
      [:li {:key (:id patient)}
-      [:p (:first_name patient)]])])
+      [patient-row patient]])])
+
+(defn main-container [patients]
+  [:div
+   [patient-list patients]])

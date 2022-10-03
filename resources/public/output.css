@@ -560,6 +560,10 @@ video {
   margin-right: 0.75rem;
 }
 
+.grid {
+  display: grid;
+}
+
 .h-1 {
   height: 0.25rem;
 }
@@ -570,6 +574,10 @@ video {
 
 .h-px {
   height: 1px;
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .overflow-visible {
