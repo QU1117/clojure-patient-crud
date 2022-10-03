@@ -7,6 +7,6 @@
   },
   "scripts": {
     "sh-w": "npx shadow-cljs watch app",
-    "tw-b": "npx tailwindcss -i ./src/input.css -o ./resources/public/output.css"
+    "tw-b": "npx tailwindcss -i ./src/input.css -o ./resources/public/output.css --watch"
   }
 }
