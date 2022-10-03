@@ -550,3 +550,97 @@ video {
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }
+
+.m-3 {
+  margin: 0.75rem;
+}
+
+.mx-3 {
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+}
+
+.h-1 {
+  height: 0.25rem;
+}
+
+.h-\[1px\] {
+  height: 1px;
+}
+
+.h-px {
+  height: 1px;
+}
+
+.overflow-visible {
+  overflow: visible;
+}
+
+.border-0 {
+  border-width: 0px;
+}
+
+.border-none {
+  border-style: none;
+}
+
+.bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
+.from-transparent {
+  --tw-gradient-from: transparent;
+  --tw-gradient-to: rgb(0 0 0 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.via-\[rgba\(0\2c 0\2c 0\2c 0\.75\)\] {
+  --tw-gradient-to: rgb(0 0 0 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), rgba(0,0,0,0.75), var(--tw-gradient-to);
+}
+
+.via-red-50 {
+  --tw-gradient-to: rgb(254 242 242 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), #fef2f2, var(--tw-gradient-to);
+}
+
+.via-black {
+  --tw-gradient-to: rgb(0 0 0 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), #000, var(--tw-gradient-to);
+}
+
+.to-\[rgba\(0\2c 0\2c 0\2c 0\)\] {
+  --tw-gradient-to: rgba(0,0,0,0);
+}
+
+.to-transparent {
+  --tw-gradient-to: transparent;
+}
+
+.p-0 {
+  padding: 0px;
+}
+
+.font-cinzel {
+  font-family: Cinzel;
+}
+
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
