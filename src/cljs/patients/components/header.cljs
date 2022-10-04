@@ -6,4 +6,4 @@
     "Patients"]
    [:hr
     {:class
-     "border-0 h-px bg-gradient-to-r from-transparent via-black"}]])
+     "border-0 h-px bg-gradient-to-r from-transparent via-black mb-12"}]])
