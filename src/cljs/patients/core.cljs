@@ -21,6 +21,3 @@
 
 (defn ^:export ^:dev/after-load run []
   (rdom/render [app] (js/document.getElementById "root")))
-
-(comment
-  @patients-state)
