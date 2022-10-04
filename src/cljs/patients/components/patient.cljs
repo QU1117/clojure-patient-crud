@@ -1,4 +1,6 @@
-(ns patients.components.patient)
+(ns patients.components.patient
+  (:require [patients.components.patient-detail :refer [modal-state
+                                                        detailed-info-state]]))
 
 (defn patient-row [patient]
   [:div {:class "grid
@@ -6,7 +8,10 @@
                  font-cinzel
                  gap-x-4
                  hover:border
-                 border-black"}
+                 border-black"
+         :on-click (fn [patient]
+                     ((reset! modal-state "block")
+                      (reset! detailed-info-state patient)))}
    [:div {:class "flex flex-row-reverse"}
     (:id patient)]
    [:div (:first_name patient)]
