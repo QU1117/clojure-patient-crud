@@ -7,9 +7,6 @@ module.exports = {
     fontFamily: {
       'cinzel': ['Cinzel']
     },
-    backgroundSize: {
-      '15%': '15%',
-    },
     extend: {},
   },
   plugins: [],

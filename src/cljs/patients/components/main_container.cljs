@@ -1,12 +1,6 @@
 (ns patients.components.main-container
-  (:require [patients.components.patient :refer [patient-row]]))
-
-(defn patient-list [patients]
-  [:ul
-   (for [patient @patients]
-     [:li {:key (:id patient)}
-      [patient-row patient]])])
+  (:require [patients.components.patient-list :refer [patient-list]]))
 
 (defn main-container [patients]
-  [:div
+  [:div {:class "grid grid-cols-2 justify-items-center"}
    [patient-list patients]])
