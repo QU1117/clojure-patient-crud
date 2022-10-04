@@ -9,9 +9,8 @@
                  gap-x-4
                  hover:border
                  border-black"
-         :on-click (fn [patient]
-                     ((reset! modal-state "block")
-                      (reset! detailed-info-state patient)))}
+         :on-click #((reset! modal-state "block")
+                    (reset! detailed-info-state patient))}
    [:div {:class "flex flex-row-reverse"}
     (:id patient)]
    [:div (:first_name patient)]

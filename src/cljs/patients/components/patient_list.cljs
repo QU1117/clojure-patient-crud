@@ -2,7 +2,7 @@
   (:require [patients.components.patient :refer [patient-row]]))
 
 (defn patient-list [patients]
-  [:div
+  [:div {:class "col-start-1 col-end-2"}
    [:ul
     (for [patient @patients]
       [:li {:key (:id patient)}
