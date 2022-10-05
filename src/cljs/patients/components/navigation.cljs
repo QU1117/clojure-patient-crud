@@ -1,4 +1,6 @@
-(ns patients.components.navigation)
+(ns patients.components.navigation
+  (:require [patients.components.main-container :refer [main-container-state]]
+            [patients.components.patient-list :refer [patient-list]]))
 
 (defn nav []
   [:nav {:class "flex
@@ -9,7 +11,8 @@
                  font-cinzel
                  hover:bg-black
                  hover:text-white
-                 hover:cursor-pointer"}
+                 hover:cursor-pointer"
+          :on-click #(reset! main-container-state patient-list)}
     "Show all patients"]
    [:div {:class "text-xl
                  m-2
