@@ -19,7 +19,8 @@
    [:div "Address: " (:address @detailed-info-state)]
    [:div "CHI number: " (:chi_number @detailed-info-state)]
    [:br]
-   [:div {:class "border-0 h-px bg-gradient-to-r from-transparent via-black mb-12"}
-    [:br]
-    [:div {:on-click #(reset! modal-state "hidden")}
-     "[Close]"]]])
+   [:div {:class "border-0 h-px bg-gradient-to-r from-transparent via-black"}]
+   [:br]
+   [:div {:class "hover:bg-black hover:text-white hover:cursor-pointer w-fit"
+          :on-click #(reset! modal-state "hidden")}
+     "[Close]"]])

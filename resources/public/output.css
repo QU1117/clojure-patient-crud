@@ -768,6 +768,12 @@ select {
   height: 1px;
 }
 
+.w-fit {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
 .flex-initial {
   flex: 0 1 auto;
 }
