@@ -14,8 +14,12 @@
    [:div "Middle name: " (:middle_name @detailed-info-state)]
    [:div "Last name: " (:last_name @detailed-info-state)]
    [:div "Gender: " (:gender @detailed-info-state)]
-   [:div "Date of birth: "]
+   [:div "Date of birth: " (.format (js/Intl.DateTimeFormat "en-GB")
+                                    (:date_of_birth @detailed-info-state))]
    [:div "Address: " (:address @detailed-info-state)]
    [:div "CHI number: " (:chi_number @detailed-info-state)]
-   [:div {:on-click #(reset! modal-state "hidden")}
-    "[Close]"]])
+   [:br]
+   [:div {:class "border-0 h-px bg-gradient-to-r from-transparent via-black mb-12"}
+    [:br]
+    [:div {:on-click #(reset! modal-state "hidden")}
+     "[Close]"]]])
