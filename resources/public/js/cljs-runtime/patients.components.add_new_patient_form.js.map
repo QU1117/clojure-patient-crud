@@ -1,1 +1,0 @@
-{"version":3,"sources":["patients/components/add_new_patient_form.cljs"],"mappings":";AAEA,2DAAA,3DAAMA;AAAN,AAAA,0FAAA,8CAAA","names":["patients.components.add-new-patient-form/add-new-patient"],"sourcesContent":["(ns patients.components.add-new-patient-form)\n\n(defn add-new-patient []\n  [:p \"Hello world\"])\n"]}
