@@ -1,0 +1,10 @@
+goog.provide('patients.components.patient');
+patients.components.patient.patient_row = (function patients$components$patient$patient_row(patient){
+return new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"class","class",-2030961996),"grid\n                 grid-cols-4\n                 font-cinzel\n                 gap-x-4\n                 hover:border\n                 border-black",new cljs.core.Keyword(null,"on-click","on-click",1632826543),(function (){
+var G__17120 = cljs.core.reset_BANG_(patients.components.patient_detail.detailed_info_state,patient);
+var fexpr__17119 = cljs.core.reset_BANG_(patients.components.patient_detail.modal_state,"block");
+return (fexpr__17119.cljs$core$IFn$_invoke$arity$1 ? fexpr__17119.cljs$core$IFn$_invoke$arity$1(G__17120) : fexpr__17119.call(null,G__17120));
+})], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"flex flex-row-reverse"], null),new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(patient)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.Keyword(null,"first_name","first_name",-1744629757).cljs$core$IFn$_invoke$arity$1(patient)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.Keyword(null,"middle_name","middle_name",1383667533).cljs$core$IFn$_invoke$arity$1(patient)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.Keyword(null,"last_name","last_name",44937527).cljs$core$IFn$_invoke$arity$1(patient)], null)], null);
+});
+
+//# sourceMappingURL=patients.components.patient.js.map
