@@ -1,7 +1,8 @@
 (ns patients.components.navigation
   (:require [patients.components.main-container :refer [main-container-state]]
             [patients.components.patient-list :refer [patient-list]]
-            [patients.components.add-new-patient-form :refer [add-new-patient]]))
+            [patients.components.add-new-patient-form :refer [add-new-patient]]
+            [patients.components.patient-detail :refer [modal-state]]))
 
 (defn nav []
   [:nav {:class "flex
@@ -21,5 +22,6 @@
                  hover:bg-black
                  hover:text-white
                  hover:cursor-pointer"
-          :on-click #(reset! main-container-state add-new-patient)}
+          :on-click #((reset! main-container-state add-new-patient)
+                      (reset! modal-state "hidden"))}
     "Add new patient"]])
