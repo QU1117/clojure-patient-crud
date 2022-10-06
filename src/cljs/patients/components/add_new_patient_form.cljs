@@ -6,14 +6,16 @@
    [:br]
    [:input {:class "mt-3 mb-6"
             :type "text"
-            :id "fname"}]
+            :id "fname"
+            :required "required"}]
    [:br]
 
    [:label {:for "mname"} "Middle name:"]
    [:br]
    [:input {:class "mt-3 mb-6"
             :type "text"
-            :id "mname"}]
+            :id "mname"
+            :required "required"}]
    [:br]
 
    [:label {:for "lname"} "Last name: "]
@@ -21,7 +23,8 @@
 
    [:input {:class "mt-3 mb-6"
             :type "text"
-            :id "lname"}]
+            :id "lname"
+            :required "required"}]
    [:br]
 
    [:label {:for "gender"} "Gender: "]
@@ -38,18 +41,25 @@
    [:br]
    [:input {:type "date"
             :id "date-of-birth"
-            :class "mt-3 mb-6"}]
+            :class "mt-3 mb-6"
+            :required "required"}]
    [:br]
    
    [:label {:for "address"} "Address: "]
    [:br]
    [:input {:class "mt-3 mb-6"
             :type "text"
-            :id "address"}]
+            :id "address"
+            :required "required"}]
    [:br]
 
    [:label {:for "chi-number"} "CHI number:"]
    [:br]
    [:input {:type "text"
             :id "chi-number"
-            :maxlength 16}]])
+            :maxlength 16
+            :required "required"}]
+   [:br]
+
+   [:input {:type "submit"
+            :value "Submit"}]])
