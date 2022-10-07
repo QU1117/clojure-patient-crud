@@ -5,7 +5,5 @@
 (def main-container-state (r/atom nil))
 
 (defn main-container []
-  [:div {:class "grid grid-cols-2 justify-items-center"}
-   (when-not (nil? @main-container-state)
-     [@main-container-state])
-   [patient-detail-modal]])
+  (when-not (nil? @main-container-state)
+    [@main-container-state]))

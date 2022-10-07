@@ -1,6 +1,6 @@
 (ns patients.components.navigation
   (:require [patients.components.main-container :refer [main-container-state]]
-            [patients.components.patient-list :refer [patient-list]]
+            [patients.components.patients-main-container :refer [patients-main-container]]
             [patients.components.add-new-patient-form :refer [add-new-patient]]
             [patients.components.patient-detail :refer [modal-state]]))
 
@@ -14,7 +14,7 @@
                  hover:bg-black
                  hover:text-white
                  hover:cursor-pointer"
-          :on-click #(reset! main-container-state patient-list)}
+          :on-click #(reset! main-container-state patients-main-container)}
     "Show all patients"]
    [:div {:class "text-xl
                  m-2
