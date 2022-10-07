@@ -1,7 +1,7 @@
 (ns patients.components.patient-list
   (:require [ajax.core :as ajax]
             [reagent.core :as r]
-            [patients.components.patient :refer [patient-row]]))
+            [patients.components.patient-row :refer [patient-row]]))
 
 (defonce patient-list-state (r/atom nil))
 

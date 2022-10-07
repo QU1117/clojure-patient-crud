@@ -1,4 +1,4 @@
-(ns patients.components.patient
+(ns patients.components.patient-row
   (:require [patients.components.patient-detail :refer [modal-state
                                                         detailed-info-state]]))
 
