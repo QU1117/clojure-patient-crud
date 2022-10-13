@@ -1,11 +1,12 @@
 ;; shadow-cljs configuration
-{:source-paths ["src/cljs"]
+{:source-paths ["src/cljs" "src/gen"]
 
  :dev-http {8081 "resources/public"}
 
  :dependencies [[reagent "1.1.1"]
                 [cljs-ajax "0.8.4"]
-                [cider/cider-nrepl "0.28.6"]]
+                [cider/cider-nrepl "0.28.6"]
+                [fork "2.4.3"]]
 
  :builds
  {:app {:target :browser
