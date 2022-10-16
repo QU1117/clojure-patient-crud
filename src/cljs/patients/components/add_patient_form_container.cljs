@@ -28,9 +28,6 @@
 
       (empty? address)
       (assoc "address" "Please specify patient's address")
-      
-      (empty? chi-number)
-      (assoc "chi-number" "Please specify patient's CHI number")
 
       (not (= 16 (count chi-number)))
       (assoc "chi-number" "CHI number must be 16 digits"))))
@@ -48,98 +45,185 @@
                 touched
                 errors]}]
      (let [render-error #(when (and (touched %) (get errors %))
-                           [:div (get errors %)])]
+                           [:div
+                            {:class "text-red-500"}
+                            (get errors %)])]
        [:form
         {:id form-id
-         :on-submit handle-submit}
-        [:label {:for "first-name"}
-         "First name:"]
-        [:input
-         {:type "text"
-          :name "first-name"
-          :id "first-name"
-          :value (values "first-name")
-          :on-change handle-change
-          :on-blur handle-blur}]
-        [render-error "first-name"]
+         :on-submit handle-submit
+         :class "grid
+                 grid-cols-2
+                 font-cinzel"}
+        [:div
+         {:class "col-start-1
+                  col-end-2
+                  justify-self-center"}
+         [:div
+          {:class "flex
+                   flex-col"}
+          [:label {:for "first-name"
+                   :class "w-fit"}
+           "First name:"]
+          [:input
+           {:type "text"
+            :name "first-name"
+            :id "first-name"
+            :value (values "first-name")
+            :on-change handle-change
+            :on-blur handle-blur
+            :class "mt-3
+                    mb-3
+                    mr-3
+                    border
+                    border-black
+                    p-1
+                    w-fit"}]
+          [render-error "first-name"]
 
-        [:label {:for "middle-name"}
-         "Middle name:"]
-        [:input
-         {:type "text"
-          :name "middle-name"
-          :id "middle-name"
-          :value (values "middle-name")
-          :on-change handle-change
-          :on-blur handle-blur}]
-        [render-error "middle-name"]
+          [:label {:for "middle-name"
+                   :class "w-fit"}
+           "Middle name:"]
+          [:input
+           {:type "text"
+            :name "middle-name"
+            :id "middle-name"
+            :value (values "middle-name")
+            :on-change handle-change
+            :on-blur handle-blur
+            :class "mt-3
+                    mb-3
+                    mr-3
+                    border
+                    border-black
+                    p-1
+                    w-fit"}]
+          [render-error "middle-name"]
 
-        [:label {:for "last-name"}
-         "Last name:"]
-        [:input
-         {:type "text"
-          :name "last-name"
-          :id "last-name"
-          :value (values "last-name")
-          :on-change handle-change
-          :on-blur handle-blur}]
-        [render-error "last-name"]
+          [:label {:for "last-name"
+                   :class "w-fit"}
+           "Last name:"]
+          [:input
+           {:type "text"
+            :name "last-name"
+            :id "last-name"
+            :value (values "last-name")
+            :on-change handle-change
+            :on-blur handle-blur
+            :class "mt-3
+                    mb-3
+                    mr-3
+                    border
+                    border-black
+                    p-1
+                    w-fit"}]
+          [render-error "last-name"]
 
-        [:label {:for "gender"}
-         "Gender:"]
-        [:select
-         {:id "gender"
-          :name "gender"
-          :value (values "gender")
-          :on-change handle-change}
-         [:option
-          {:selected true
-           :disabled true}
-          "Please specify patient's gender"]
-         [:option
-          {:value "Male"}
-          "Male"]
-         [:option
-          {:value "Female"}
-          "Female"]
-         [:option
-          {:value "Other"}
-          "Other"]]
-        [render-error "gender"]
+          [:label {:for "gender"}
+           "Gender:"]
+          [:select
+           {:id "gender"
+            :name "gender"
+            :value (values "gender")
+            :on-change handle-change
+            :class "mt-3
+                    mb-3
+                    mr-3
+                    border
+                    border-black
+                    w-fit
+                    bg-white
+                    p-1"}
+           [:option
+            {:selected true
+             :disabled true}
+            "Please specify patient's gender"]
+           [:option
+            {:value "Male"}
+            "Male"]
+           [:option
+            {:value "Female"}
+            "Female"]
+           [:option
+            {:value "Other"}
+            "Other"]]
+          [render-error "gender"]]]
 
-        [:label {:for "date-of-birth"}
-         "Date of birth:"]
-        [:input
-         {:type "date"
-          :id "date-of-birth"
-          :name "date-of-birth"
-          :value (values "date-of-birth")
-          :on-change handle-change
-          :on-blur handle-blur}]
-        [render-error "date-of-birth"]
+        [:div
+         {:class "col-start-2
+                  col-end-3"}
+         [:div
+          {:class "flex
+                   flex-col"}
+          [:label {:for "date-of-birth"
+                   :class "w-fit"}
+           "Date of birth:"]
+          [:input
+           {:type "date"
+            :id "date-of-birth"
+            :name "date-of-birth"
+            :value (values "date-of-birth")
+            :on-change handle-change
+            :on-blur handle-blur
+            :class "mt-3
+                    mb-3
+                    mr-3
+                    border
+                    border-black
+                    pt-1
+                    pb-1
+                    pl-1
+                    pr-0
+                    w-fit"}]
+          [render-error "date-of-birth"]
 
-        [:label {:for "address"}
-         "Address:"]
-        [:input
-         {:type "text"
-          :name "address"
-          :id "address"
-          :value (values "address")
-          :on-change handle-change
-          :on-blur handle-blur}]
-        [render-error "address"]
-        
-        [:label {:for "chi-number"}
-         "CHI number:"]
-        [:input
-         {:type "number"
-          :name "chi-number"
-          :id "chi-number"
-          :value (values "chi-number")
-          :on-change handle-change
-          :on-blur handle-blur}]
-        [render-error "chi-number"]
+          [:label {:for "address"
+                   :class "w-fit"}
+           "Address:"]
+          [:input
+           {:type "text"
+            :name "address"
+            :id "address"
+            :value (values "address")
+            :on-change handle-change
+            :on-blur handle-blur
+            :class "mt-3
+                    mb-3
+                    mr-3
+                    border
+                    border-black
+                    p-1
+                    w-fit"}]
+          [render-error "address"]
+         
+          [:label {:for "chi-number"
+                   :class "w-fit"}
+           "CHI number:"]
+          [:input
+           {:type "number"
+            :name "chi-number"
+            :id "chi-number"
+            :value (values "chi-number")
+            :on-change handle-change
+            :on-blur handle-blur
+            :class "mt-3
+                    mb-3
+                    mr-3
+                    border
+                    border-black
+                    p-1
+                    w-fit"
+            :min 1}]
+          [render-error "chi-number"]
 
-        [:button
-         {:type "submit"}
-         "Submit"]]))])
+          [:button
+           {:type "submit"
+            :class "text-xl
+                    w-fit
+                    hover:bg-black
+                    hover:text-white
+                    hover:cursor-pointer
+                    mt-6
+                    ml-20
+                    p-2
+                    "}
+           "Submit"]]]]))])
