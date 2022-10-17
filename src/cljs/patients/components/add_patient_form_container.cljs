@@ -1,5 +1,6 @@
 (ns patients.components.add-patient-form-container
-  (:require [fork.reagent :as fork]))
+  (:require [fork.reagent :as fork]
+            [ajax.core :as ajax]))
 
 (defn- validation [values]
   (let [first-name    (get values "first-name" "")
@@ -35,7 +36,19 @@
 (defn add-patient-form []
   [fork/form
    {:prevent-default? true
-    :on-submit #(js/alert (:values %))
+    :on-submit #(ajax/POST "http://localhost:4000/api/patients/"
+                           {:params
+                            {:first_name    ((:values %) "first-name")
+                             :middle_name   ((:values %) "middle-name")
+                             :last_name     ((:values %) "last-name")
+                             :gender        ((:values %) "gender")
+                             :date_of_birth ((:values %) "date-of-birth")
+                             :address       ((:values %) "address")
+                             :chi_number    (js/parseInt
+                                             ((:values %) "chi-number"))}
+                            :finally (fn []
+                                       (js/alert
+                                        "Patient has been created"))})
     :validation validation}
    (fn [{:keys [form-id
                 values
@@ -135,7 +148,8 @@
                     p-1"}
            [:option
             {:selected true
-             :disabled true}
+             :disabled true
+             :value "specify-gender"}
             "Please specify patient's gender"]
            [:option
             {:value "Male"}
