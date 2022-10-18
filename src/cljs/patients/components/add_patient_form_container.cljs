@@ -46,9 +46,8 @@
                              :address       ((:values %) "address")
                              :chi_number    (js/parseInt
                                              ((:values %) "chi-number"))}
-                            :finally (fn []
-                                       (js/alert
-                                        "Patient has been created"))})
+                            :handler (fn [_]
+                                       (js/alert "Patient has been created"))})
     :validation validation}
    (fn [{:keys [form-id
                 values
