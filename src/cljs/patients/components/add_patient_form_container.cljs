@@ -1,6 +1,7 @@
 (ns patients.components.add-patient-form-container
   (:require [fork.reagent :as fork]
-            [ajax.core :as ajax]))
+            [ajax.core :as ajax]
+            [patients.components.main-container :refer [main-container-state]]))
 
 (defn- validation [values]
   (let [first-name    (get values "first-name" "")
@@ -47,7 +48,8 @@
                              :chi_number    (js/parseInt
                                              ((:values %) "chi-number"))}
                             :handler (fn [_]
-                                       (js/alert "Patient has been created"))})
+                                       ((reset! main-container-state nil)
+                                        (js/alert "Patient has been created")))})
     :validation validation}
    (fn [{:keys [form-id
                 values
