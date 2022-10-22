@@ -1,4 +1,4 @@
-(ns frontend.test-runner
+(ns test-runner
   (:require [jx.reporter.karma :refer-macros [run-all-tests]]))
 
 (enable-console-print!)

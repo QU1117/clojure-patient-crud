@@ -5,11 +5,11 @@ module.exports = function(config) {
     frameworks: ['cljs-test'],
     plugins: ['karma-cljs-test', 'karma-chrome-launcher'],
     colors: true,
-    basePath: 'resources/public/js/',
-    files: ['core.js'],
+    basePath: '',
+    files: ['karma.js'],
     logLevel: config.LOG_INFO,
     client: {
-      args: ['test.frontend.test_runner.run'],
+      args: ['shadow.test.karma.init'],
       singleRun: true,
     },
   });

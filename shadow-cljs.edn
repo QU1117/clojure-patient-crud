@@ -1,5 +1,5 @@
 ;; shadow-cljs configuration
-{:source-paths ["src/cljs" "src/gen"]
+{:source-paths ["src/cljs" "test/frontend"]
 
  :dev-http {8081 "resources/public"}
 
@@ -12,4 +12,7 @@
  {:app {:target :browser
         :output-dir "resources/public/js/"
         :asset-path "/js/"
-        :modules {:core {:init-fn patients.core/run}}}}}
+        :modules {:core {:init-fn patients.core/run}}}
+  
+  :tests {:target :karma
+          :output-to "karma.js"}}}
