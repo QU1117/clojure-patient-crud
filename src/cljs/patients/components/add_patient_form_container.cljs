@@ -51,8 +51,7 @@
                                        ((reset! main-container-state nil)
                                         (js/alert "Patient has been created")))})
     :validation validation}
-   (fn [{:keys [form-id
-                values
+   (fn [{:keys [values
                 handle-change
                 handle-blur
                 handle-submit
@@ -63,7 +62,7 @@
                             {:class "text-red-500"}
                             (get errors %)])]
        [:form
-        {:id form-id
+        {:id "add-patient-form"
          :on-submit handle-submit
          :class "grid
                  grid-cols-2
