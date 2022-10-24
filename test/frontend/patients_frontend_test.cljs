@@ -55,6 +55,6 @@
                                    #js {"name" "CHI number:"}))))))
 
   (testing "Is submit form button exists?"
-    (is (not (nil? (-> rtl/screen
-                       (.getByRole "button"
-                                   #js {"name" "Submit"})))))))
+    (is (not (nil? (-> (r/as-element [app])
+                       (rtl/render)
+                       (.container.querySelector "#submit-add-form")))))))
