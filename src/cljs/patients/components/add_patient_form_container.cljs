@@ -239,5 +239,6 @@
                     mt-6
                     ml-20
                     p-2
-                    "}
+                    "
+            :id "submit-add-form"}
            "Submit"]]]]))])
