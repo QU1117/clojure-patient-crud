@@ -19,4 +19,42 @@
 
     (is (not (nil? (-> (r/as-element [app])
                        (rtl/render)
-                       (.container.querySelector "#add-patient-form")))))))
+                       (.container.querySelector "#add-patient-form"))))))
+
+  (testing "Is first name input field exists?"
+    (is (not (nil? (-> rtl/screen
+                       (.getByRole "textbox"
+                                   #js {"name" "First name:"}))))))
+
+  (testing "Is middle name input field exists?"
+    (is (not (nil? (-> rtl/screen
+                       (.getByRole "textbox"
+                                   #js {"name" "Middle name:"}))))))
+
+  (testing "Is last name input field exists?"
+    (is (not (nil? (-> rtl/screen
+                       (.getByRole "textbox"
+                                   #js {"name" "Last name:"}))))))
+
+  (testing "Is gender select field exists?"
+    (is (not (nil? (-> rtl/screen
+                       (.getByRole "combobox"
+                                   #js {"name" "Gender:"}))))))
+
+  (testing "Is date of birth input exists?"
+    (is (not (nil? (-> rtl/screen
+                       (.getByLabelText "Date of birth:"))))))
+
+  (testing "Is address input field exists?"
+    (is (not (nil? (-> rtl/screen
+                       (.getByRole "textbox" #js {"name" "Address:"}))))))
+
+  (testing "Is CHI number input field exists?"
+    (is (not (nil? (-> rtl/screen
+                       (.getByRole "spinbutton"
+                                   #js {"name" "CHI number:"}))))))
+
+  (testing "Is submit form button exists?"
+    (is (not (nil? (-> rtl/screen
+                       (.getByRole "button"
+                                   #js {"name" "Submit"})))))))
