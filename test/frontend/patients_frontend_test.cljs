@@ -41,9 +41,12 @@
                        (.getByRole "combobox"
                                    #js {"name" "Gender:"}))))))
 
-  (testing "Is date of birth input exists?"
-    (is (not (nil? (-> rtl/screen
-                       (.getByLabelText "Date of birth:"))))))
+  (testing "Is input of type date (of birth) exists?"
+    (is (=
+         "date"
+         (-> rtl/screen
+             (.getByLabelText "Date of birth:")
+             (.-type)))))
 
   (testing "Is address input field exists?"
     (is (not (nil? (-> rtl/screen
