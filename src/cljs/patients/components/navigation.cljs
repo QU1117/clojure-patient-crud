@@ -24,4 +24,11 @@
                  hover:cursor-pointer"
           :on-click #((reset! main-container-state add-patient-form)
                       (reset! modal-state "hidden"))}
-    "Add new patient"]])
+    "Add new patient"]
+   [:div {:class "text-xl
+                  m-2
+                  font-cinzel
+                  hover:bg-black
+                  hover:text-white
+                  hover:cursor-pointer"}
+    "Search"]])
