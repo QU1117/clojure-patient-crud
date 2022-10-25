@@ -61,3 +61,15 @@
     (is (not (nil? (-> (r/as-element [app])
                        (rtl/render)
                        (.container.querySelector "#submit-add-form")))))))
+
+
+(deftest test-search-form
+  (testing "Form for searching patients should be visible after click"
+    (-> (r/as-element [app])
+        (rtl/render)
+        (.getByText "Search")
+        (rtl/fireEvent.click))
+
+    (is (not (nil? (-> (r/as-element [app])
+                       (rtl/render)
+                       (.container.querySelector "#search-form")))))))
