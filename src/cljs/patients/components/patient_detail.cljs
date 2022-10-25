@@ -35,7 +35,7 @@
           :on-click #((reset! update-patient-state @detailed-info-state)
                       (reset! main-container-state update-patient-form)
                       (reset! modal-state "hidden"))}
-   "[Update patient's info"]
+   "[Update patient's info]"]
 
    [:div {:class "hover:bg-black hover:text-white hover:cursor-pointer w-fit"
          :on-click
@@ -51,4 +51,4 @@
                                    (:id @detailed-info-state))
                               {:handler
                                (js/alert "Patient info has been deleted")}))}
-   "[Delete patient's info"]])
+   "[Delete patient's info]"]])
