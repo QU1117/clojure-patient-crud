@@ -87,6 +87,11 @@
          :class "grid
                  grid-cols-2
                  font-cinzel"}
+        [:div {:class "justify-self-center text-2xl mb-4"}
+         "Update patient's info"
+         [:hr
+          {:class
+           "border-0 h-px bg-gradient-to-r from-transparent via-black mb-12"}]]
         [:div
          {:class "col-start-1
                   col-end-2
@@ -260,4 +265,4 @@
                     ml-20
                     p-2
                     "}
-           "Update patient's info"]]]]))])
+           "Submit"]]]]))])
