@@ -2,7 +2,8 @@
   (:require [patients.components.main-container :refer [main-container-state]]
             [patients.components.patients-main-container :refer [patients-main-container]]
             [patients.components.patient-detail :refer [modal-state]]
-            [patients.components.add-patient-form-container :refer [add-patient-form]]))
+            [patients.components.add-patient-form-container :refer [add-patient-form]]
+            [patients.components.search-form-component :refer [search-form]]))
 
 (defn nav []
   [:nav {:class "flex
@@ -30,5 +31,6 @@
                   font-cinzel
                   hover:bg-black
                   hover:text-white
-                  hover:cursor-pointer"}
+                  hover:cursor-pointer"
+          :on-click #(reset! main-container-state search-form)}
     "Search"]])
