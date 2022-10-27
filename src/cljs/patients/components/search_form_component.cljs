@@ -2,9 +2,34 @@
   (:require [fork.reagent :as fork]
             [ajax.core :as ajax]))
 
+(defn validate-search [values]
+  (let [first-name    (get values "first-name" "")
+        middle-name   (get values "middle-name" "")
+        last-name     (get values "last-name" "")
+        gender        (get values "gender" "")
+        date-of-birth (get values "date-of-birth" "")
+        address       (get values "address" "")
+        chi-number    (get values "chi-number" "")]
+
+    (cond->
+        {}
+      (and (empty? first-name)
+           (empty? middle-name)
+           (empty? last-name)
+           (empty? gender)
+           (empty? date-of-birth)
+           (empty? address)
+           (empty? chi-number))
+      (assoc "empty-search-error"
+             "Please provide at least one input for search")
+
+      (not (= 16 (count chi-number)))
+      (assoc "chi-number" "CHI number must be 16 digits"))))
+
 (defn search-form []
   [fork/form
    {:prevent-default? true
+    :validation validate-search
     :on-submit #(ajax/POST
                  "http://localhost:4000/api/patients/search"
                  {:params
@@ -26,9 +51,7 @@
                    :address       (if (seq ((:values %) "address"))
                                     ((:values %) "address")
                                     "")
-                   :chi_number    (if (not (nil?
-                                            (js/parseInt
-                                             ((:values %) "chi-number"))))
+                   :chi_number    (if (seq ((:values %) "chi-number"))
                                     (js/parseInt
                                      ((:values %) "chi-number"))
                                     0)}})}
@@ -38,7 +61,7 @@
                 handle-submit
                 touched
                 errors]}]
-     (let [render-error #(when (and (touched %) (get errors %))
+     (let [render-error #(when (get errors %)
                            [:div
                             {:class "text-red-500"}
                             (get errors %)])]
@@ -77,7 +100,6 @@
                     border-black
                     p-1
                     w-fit"}]
-          [render-error "first-name"]
 
           [:label {:for "middle-name"
                    :class "w-fit"}
@@ -96,7 +118,6 @@
                     border-black
                     p-1
                     w-fit"}]
-          [render-error "middle-name"]
 
           [:label {:for "last-name"
                    :class "w-fit"}
@@ -115,7 +136,6 @@
                     border-black
                     p-1
                     w-fit"}]
-          [render-error "last-name"]
 
           [:label {:for "gender"}
            "Gender:"]
@@ -145,8 +165,7 @@
             "Female"]
            [:option
             {:value "Other"}
-            "Other"]]
-          [render-error "gender"]]]
+            "Other"]]]]
 
         [:div
          {:class "col-start-2
@@ -174,7 +193,6 @@
                     pl-1
                     pr-0
                     w-fit"}]
-          [render-error "date-of-birth"]
 
           [:label {:for "address"
                    :class "w-fit"}
@@ -193,7 +211,6 @@
                     border-black
                     p-1
                     w-fit"}]
-          [render-error "address"]
          
           [:label {:for "chi-number"
                    :class "w-fit"}
@@ -213,7 +230,6 @@
                     p-1
                     w-fit"
             :min 1}]
-          [render-error "chi-number"]
 
           [:button
            {:type "submit"
@@ -227,4 +243,6 @@
                     p-2
                     "
             :id "submit-add-form"}
-           "Submit"]]]]))])
+           "Submit"]
+          [render-error "empty-search-error"]
+          [render-error "chi-number"]]]]))])
