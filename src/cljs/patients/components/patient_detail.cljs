@@ -2,8 +2,9 @@
   (:require [reagent.core :as r]
             [ajax.core :as ajax]
             [patients.components.main-container :refer [main-container-state]]
-            [patients.components.update-patient-form :refer [update-patient-form
-                                                             update-patient-state]]))
+            [patients.components.update-patient-form
+             :refer [update-patient-form
+                     update-patient-state]]))
 
 (def modal-state (r/atom "hidden"))
 (def detailed-info-state (r/atom nil))
@@ -14,17 +15,27 @@
                  "col-start-2
                  col-end-3
                  font-cinzel")}
+   
    [:div "First name: " (:first_name @detailed-info-state)]
+
    [:div "Middle name: " (:middle_name @detailed-info-state)]
+
    [:div "Last name: " (:last_name @detailed-info-state)]
+
    [:div "Gender: " (:gender @detailed-info-state)]
+
    [:div "Date of birth: " (->>
                             (:date_of_birth @detailed-info-state)
                             (.format (js/Intl.DateTimeFormat "en-GB")))]
+
    [:div "Address: " (:address @detailed-info-state)]
+
    [:div "CHI number: " (:chi_number @detailed-info-state)]
+
    [:br]
+
    [:div {:class "border-0 h-px bg-gradient-to-r from-transparent via-black"}]
+
    [:br]
    
    [:div {:class "hover:bg-black hover:text-white hover:cursor-pointer w-fit"
