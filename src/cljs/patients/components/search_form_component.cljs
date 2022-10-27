@@ -59,7 +59,6 @@
                 handle-change
                 handle-blur
                 handle-submit
-                touched
                 errors]}]
      (let [render-error #(when (get errors %)
                            [:div
