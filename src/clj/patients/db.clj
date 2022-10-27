@@ -64,3 +64,6 @@
 
 (defn delete-record-by-id [id]
   (sql/delete! ds :patients {:id id}))
+
+(defn search-records [map]
+  (sql/find-by-keys ds :patients map))
