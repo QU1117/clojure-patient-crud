@@ -6,38 +6,32 @@
   [fork/form
    {:prevent-default? true
     :on-submit #(ajax/POST
-                 "http://localhost:4000/api/patients/"
+                 "http://localhost:4000/api/patients/search"
                  {:params
-                  (fn []
-                    (let [first-name    ((:values %) "first-name" "")
-                          middle-name   ((:values %) "middle-name" "")
-                          last-name     ((:values %) "last-name" "")
-                          gender        ((:values %) "gender" "")
-                          date-of-birth ((:values %) "date-of-birth" "")
-                          address       ((:values %) "address" "")
-                          chi-number    ((:values %) "chi-number" "")]
-                      (cond->
-                          {}
-                          (seq first-name)
-                          (assoc :first_name first-name)
-                        
-                          (seq middle-name)
-                          (assoc :middle_name middle-name)
-                        
-                          (seq last-name)
-                          (assoc :last_name last-name)
-                        
-                          (seq gender)
-                          (assoc :gender gender)
-                        
-                          (seq date-of-birth)
-                          (assoc :date_of_birth date-of-birth)
-                        
-                          (seq address)
-                          (assoc :address address)
-                        
-                          (seq chi-number)
-                          (assoc :chi_number (js/parseInt chi-number)))))})}
+                  {:first_name    (if (seq ((:values %) "first-name"))
+                                    ((:values %) "first-name")
+                                    "")
+                   :middle_name   (if (seq ((:values %) "middle-name"))
+                                    ((:values %) "middle-name")
+                                    "")
+                   :last_name     (if (seq ((:values %) "last-name"))
+                                    ((:values %) "last-name")
+                                    "")
+                   :gender        (if (seq ((:values %) "gender"))
+                                    ((:values %) "gender")
+                                    "")
+                   :date_of_birth (if (seq ((:values %) "date-of-birth"))
+                                    ((:values %) "date-of-birth")
+                                    "")
+                   :address       (if (seq ((:values %) "address"))
+                                    ((:values %) "address")
+                                    "")
+                   :chi_number    (if (not (nil?
+                                            (js/parseInt
+                                             ((:values %) "chi-number"))))
+                                    (js/parseInt
+                                     ((:values %) "chi-number"))
+                                    0)}})}
    (fn [{:keys [values
                 handle-change
                 handle-blur
@@ -57,8 +51,8 @@
         [:div {:class "justify-self-center text-2xl mb-4"}
          "Search"
          [:hr
-    {:class
-     "border-0 h-px bg-gradient-to-r from-transparent via-black mb-12"}]]
+          {:class
+           "border-0 h-px bg-gradient-to-r from-transparent via-black mb-12"}]]
         [:div
          {:class "col-start-1
                   col-end-2
