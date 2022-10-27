@@ -50,3 +50,38 @@
 
         {:status 200
          :body contact})))
+
+(defn search-patients
+  [{:keys [parameters]}]
+  (let [body (:body parameters)
+        search-keys (cond->
+                        body
+                      (empty? (:first_name body))
+                      (dissoc body :first_name)
+                      
+                      (empty? (:middle_name body))
+                      (dissoc body :middle_name)
+                      
+                      (empty? (:last_name body))
+                      (dissoc body :last_name)
+                      
+                      (empty? (:gender body))
+                      (dissoc body :gender)
+
+                      (empty? (:date_of_birth body))
+                      (dissoc body :date_of_birth)
+                      
+                      (empty? (:address body))
+                      (dissoc body :address)
+                      
+                      (<= (:chi_number body) 0)
+                      (dissoc body :chi_number))
+        
+        result (db/search-records search-keys)]
+    
+    (if (empty? result)
+      {:status 404
+       :body "No patients found"}
+
+      {:status 200
+       :body result})))
