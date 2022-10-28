@@ -39,12 +39,12 @@
    {:prevent-default? true
     :on-submit #(ajax/POST "http://localhost:4000/api/patients/"
                            {:params
-                            {:first_name    ((:values %) "first-name")
-                             :middle_name   ((:values %) "middle-name")
-                             :last_name     ((:values %) "last-name")
+                            {:first_name    (.trim ((:values %) "first-name"))
+                             :middle_name   (.trim ((:values %) "middle-name"))
+                             :last_name     (.trim ((:values %) "last-name"))
                              :gender        ((:values %) "gender")
                              :date_of_birth ((:values %) "date-of-birth")
-                             :address       ((:values %) "address")
+                             :address       (.trim ((:values %) "address"))
                              :chi_number    (js/parseInt
                                              ((:values %) "chi-number"))}
                             :handler (fn [_]
