@@ -65,10 +65,7 @@
                   
                   :handler (fn [response]
                              ((reset! results-state response)
-                              (reset! main-container-state results-main-container)))
-
-                  :error-handler (fn [err]
-                                   (reset! main-container-state [:div (:response err)]))})}
+                              (reset! main-container-state results-main-container)))})}
    (fn [{:keys [values
                 handle-change
                 handle-blur
