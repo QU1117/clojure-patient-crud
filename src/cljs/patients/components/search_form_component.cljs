@@ -156,26 +156,6 @@
          [:div
           {:class "flex
                    flex-col"}
-          [:label {:for "date-of-birth"
-                   :class "w-fit"}
-           "Date of birth:"]
-          [:input
-           {:type "date"
-            :id "date-of-birth"
-            :name "date-of-birth"
-            :value (values "date-of-birth")
-            :on-change handle-change
-            :on-blur handle-blur
-            :class "mt-3
-                    mb-3
-                    mr-3
-                    border
-                    border-black
-                    pt-1
-                    pb-1
-                    pl-1
-                    pr-0
-                    w-fit"}]
 
           [:label {:for "address"
                    :class "w-fit"}
