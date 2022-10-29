@@ -1,6 +1,10 @@
 (ns patients.components.search-form-component
   (:require [fork.reagent :as fork]
-            [ajax.core :as ajax]))
+            [ajax.core :as ajax]
+            [patients.components.main-container :refer [main-container-state]]
+            [patients.components.search-results-list :refer [results-main-container
+                                                             results-state
+                                                             errors]]))
 
 (defn validate-search [values]
   (let [first-name    (get values "first-name" "")
@@ -21,17 +25,14 @@
            (empty? address)
            (empty? chi-number))
       (assoc "empty-search-error"
-             "Please provide at least one input for search")
-
-      (not (= 16 (count chi-number)))
-      (assoc "chi-number" "CHI number must be 16 digits"))))
+             "Please provide at least one input for search"))))
 
 (defn search-form []
   [fork/form
    {:prevent-default? true
     :validation validate-search
     :on-submit #(ajax/POST
-                 "http://localhost:4000/api/patients/search"
+                 "http://localhost:4000/api/patients/search/"
                  {:params
                   {:first_name    (if (seq ((:values %) "first-name"))
                                     ((:values %) "first-name")
@@ -43,10 +44,16 @@
                                     ((:values %) "last-name")
                                     "")
                    :gender        (if (seq ((:values %) "gender"))
-                                    ((:values %) "gender")
+                                    (.trim ((:values %) "gender"))
                                     "")
                    :date_of_birth (if (seq ((:values %) "date-of-birth"))
-                                    ((:values %) "date-of-birth")
+                                    (->> ((:values %) "date-of-birth")
+                                         (.format
+                                          (js/Intl.DateTimeFormat
+                                           "fr-CA"
+                                           #js {"year" "numeric"
+                                                "month" "2-digit"
+                                                "day" "2-digit"})))
                                     "")
                    :address       (if (seq ((:values %) "address"))
                                     ((:values %) "address")
@@ -54,7 +61,14 @@
                    :chi_number    (if (seq ((:values %) "chi-number"))
                                     (js/parseInt
                                      ((:values %) "chi-number"))
-                                    0)}})}
+                                    0)}
+                  
+                  :handler (fn [response]
+                             ((reset! results-state response)
+                              (reset! main-container-state results-main-container)))
+
+                  :error-handler (fn [err]
+                                   (reset! main-container-state [:div (:response err)]))})}
    (fn [{:keys [values
                 handle-change
                 handle-blur
@@ -134,37 +148,7 @@
                     border
                     border-black
                     p-1
-                    w-fit"}]
-
-          [:label {:for "gender"}
-           "Gender:"]
-          [:select
-           {:id "gender"
-            :name "gender"
-            :value (values "gender")
-            :on-change handle-change
-            :class "mt-3
-                    mb-3
-                    mr-3
-                    border
-                    border-black
-                    w-fit
-                    bg-white
-                    p-1"}
-           [:option
-            {:selected true
-             :disabled true
-             :value "specify-gender"}
-            "Please specify patient's gender"]
-           [:option
-            {:value "Male"}
-            "Male"]
-           [:option
-            {:value "Female"}
-            "Female"]
-           [:option
-            {:value "Other"}
-            "Other"]]]]
+                    w-fit"}]]]
 
         [:div
          {:class "col-start-2
@@ -243,5 +227,4 @@
                     "
             :id "submit-add-form"}
            "Submit"]
-          [render-error "empty-search-error"]
-          [render-error "chi-number"]]]]))])
+          [render-error "empty-search-error"]]]]))])
