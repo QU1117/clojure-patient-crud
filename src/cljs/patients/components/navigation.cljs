@@ -37,5 +37,6 @@
                   hover:bg-black
                   hover:text-white
                   hover:cursor-pointer"
-          :on-click #(reset! main-container-state search-form)}
+          :on-click #((reset! main-container-state search-form)
+                      (reset! modal-state "hidden"))}
     "Search"]])
