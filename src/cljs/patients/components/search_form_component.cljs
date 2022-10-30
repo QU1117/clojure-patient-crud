@@ -35,26 +35,29 @@
                  "http://localhost:4000/api/patients/search/"
                  {:params
                   {:first_name    (if (seq ((:values %) "first-name"))
-                                    ((:values %) "first-name")
+                                    (-> ((:values %) "first-name")
+                                        (.trim))
                                     "")
+
                    :middle_name   (if (seq ((:values %) "middle-name"))
-                                    ((:values %) "middle-name")
+                                    (-> ((:values %) "middle-name")
+                                        (.trim))
                                     "")
+
                    :last_name     (if (seq ((:values %) "last-name"))
-                                    ((:values %) "last-name")
+                                    (-> ((:values %) "last-name")
+                                        (.trim))
                                     "")
+
                    :gender        (if (seq ((:values %) "gender"))
-                                    (.trim ((:values %) "gender"))
+                                    (-> ((:values %) "gender")
+                                        (.trim))
                                     "")
+
                    :date_of_birth (if (seq ((:values %) "date-of-birth"))
-                                    (->> ((:values %) "date-of-birth")
-                                         (.format
-                                          (js/Intl.DateTimeFormat
-                                           "fr-CA"
-                                           #js {"year" "numeric"
-                                                "month" "2-digit"
-                                                "day" "2-digit"})))
+                                    ((:values %) "date-of-birth")
                                     "")
+                   
                    :address       (if (seq ((:values %) "address"))
                                     ((:values %) "address")
                                     "")
@@ -145,7 +148,37 @@
                     border
                     border-black
                     p-1
-                    w-fit"}]]]
+                    w-fit"}]]
+
+         [:label {:for "gender"}
+           "Gender:"]
+          [:select
+           {:id "gender"
+            :name "gender"
+            :value (values "gender")
+            :on-change handle-change
+            :class "mt-3
+                    mb-3
+                    mr-3
+                    border
+                    border-black
+                    w-fit
+                    bg-white
+                    p-1"}
+           [:option
+            {:selected true
+             :disabled true
+             :value "specify-gender"}
+            "Please specify patient's gender"]
+           [:option
+            {:value "Male"}
+            "Male"]
+           [:option
+            {:value "Female"}
+            "Female"]
+           [:option
+            {:value "Other"}
+            "Other"]]]
 
         [:div
          {:class "col-start-2
@@ -153,6 +186,27 @@
          [:div
           {:class "flex
                    flex-col"}
+
+          [:label {:for "date-of-birth"
+                   :class "w-fit"}
+           "Date of birth:"]
+          [:input
+           {:type "date"
+            :id "date-of-birth"
+            :name "date-of-birth"
+            :value (values "date-of-birth")
+            :on-change handle-change
+            :on-blur handle-blur
+            :class "mt-3
+                    mb-3
+                    mr-3
+                    border
+                    border-black
+                    pt-1
+                    pb-1
+                    pl-1
+                    pr-0
+                    w-fit"}]
 
           [:label {:for "address"
                    :class "w-fit"}
