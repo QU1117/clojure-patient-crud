@@ -66,5 +66,31 @@
   (sql/delete! ds :patients {:id id}))
 
 (defn search-records [map]
-  (sql/find-by-keys ds :patients map
-                    {:builder-fn rs/as-unqualified-maps}))
+  (let [query (cond->
+                  "SELECT * FROM patients WHERE"
+                
+                (seq (:first_name map))
+                (str " TRUE AND first_name ILIKE '%" (:first_name map) "%'")
+
+                (seq (:middle_name map))
+                (str " TRUE AND middle_name ILIKE '%" (:middle_name map) "%'")
+
+                (seq (:last_name map))
+                (str " TRUE AND last_name ILIKE '%" (:last_name map) "%'")
+
+                (seq (:gender map))
+                (str " TRUE AND gender ILIKE '" (:gender map) "'")
+
+                (seq (:date_of_birth map))
+                (str " TRUE AND date_of_birth::text LIKE '" (:date_of_birth map) "'")
+
+                (seq (:address map))
+                (str " TRUE AND address ILIKE '%" (:address map) "%'")
+
+                (not (nil? (:chi_number map)))
+                (str " TRUE AND chi_number::text ILIKE '%" (:chi_number map) "%'")
+
+                (true? true)
+                (str ";"))]
+    (jdbc/execute! ds [query]
+                  {:builder-fn rs/as-unqualified-maps})))
