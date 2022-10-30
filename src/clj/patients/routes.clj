@@ -35,7 +35,5 @@
                       :parameters {:body {:first_name schema/Str
                                           :middle_name schema/Str
                                           :last_name schema/Str
-                                          :gender schema/Str
-                                          :date_of_birth schema/Str
                                           :address schema/Str
                                           :chi_number schema/Int}}}}]])

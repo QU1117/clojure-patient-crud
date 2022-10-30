@@ -64,13 +64,7 @@
                       
                       (empty? (:last_name body))
                       (dissoc body :last_name)
-                      
-                      (empty? (:gender body))
-                      (dissoc body :gender)
-
-                      (empty? (:date_of_birth body))
-                      (dissoc body :date_of_birth)
-                      
+                     
                       (empty? (:address body))
                       (dissoc body :address)
                       
