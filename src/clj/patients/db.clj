@@ -109,22 +109,22 @@
     (conj " first_name ILIKE ? ")
 
     (seq (:middle_name map))
-    (conj "middle_name ILIKE ? ")
+    (conj " middle_name ILIKE ? ")
 
     (seq (:last_name map))
-    (conj "last_name ILIKE ? ")
+    (conj " last_name ILIKE ? ")
 
     (seq (:gender map))
-    (conj "gender ILIKE ? ")
+    (conj " gender ILIKE ? ")
 
     (seq (:date_of_birth map))
-    (conj "date_of_birth::text LIKE ? ")
+    (conj " date_of_birth::text LIKE ? ")
 
     (seq (:address map))
-    (conj "address ILIKE ? ")
+    (conj " address ILIKE ? ")
 
     (= 16 (count (:chi_number map)))
-    (conj "chi_number::text ILIKE ? ")
+    (conj " chi_number::text ILIKE ? ")
 
     (true? true)
     (conj ";")))
@@ -162,4 +162,6 @@
   (let [query-parts (sql-search-parts map)
         query (sql-prepared-query query-parts)
         values (sql-search-values map)]
-    (into [] cat [[query] values])))
+    (sql/query ds
+               (into [] cat [[query] values])
+               {:builder-fn rs/as-unqualified-maps})))
