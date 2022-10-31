@@ -65,32 +65,101 @@
 (defn delete-record-by-id [id]
   (sql/delete! ds :patients {:id id}))
 
-(defn search-records [map]
-  (let [query (cond->
-                  "SELECT * FROM patients WHERE"
-                
-                (seq (:first_name map))
-                (str " TRUE AND first_name ILIKE '%" (:first_name map) "%'")
+;; this is where the edge of sanity ends
+;; I've decided to dissect the logic of sewing together SQL query from initial
+;; input map into separate functions. It also makes them easier to test in REPL.
 
-                (seq (:middle_name map))
-                (str " TRUE AND middle_name ILIKE '%" (:middle_name map) "%'")
+(defn- sql-search-values
+  "Returns vector with values from initial argument map based on their presence"
 
-                (seq (:last_name map))
-                (str " TRUE AND last_name ILIKE '%" (:last_name map) "%'")
+  [map]
+  (cond->
+      []
+    (seq (:first_name map))
+    (conj (:first_name map))
+    
+    (seq (:middle_name map))
+    (conj (:middle_name map))
+    
+    (seq (:last_name map))
+    (conj (:last_name map))
+    
+    (seq (:gender map))
+    (conj (:gender map))
+    
+    (seq (:date_of_birth map))
+    (conj (:date_of_birth map))
+    
+    (seq (:address map))
+    (conj (:address map)) 
+    
+    (= 16 (count (:chi_number map)))
+    (conj (:chi_number map))))
 
-                (seq (:gender map))
-                (str " TRUE AND gender ILIKE '" (:gender map) "'")
+(defn- sql-search-parts
+  "Returns vector with SQL query parts based on their presence in argument map"
 
-                (seq (:date_of_birth map))
-                (str " TRUE AND date_of_birth::text LIKE '" (:date_of_birth map) "'")
+  [map]
+  (cond->
+      []
+    (true? true)
+    (conj "SELECT * FROM patients WHERE")
+    
+    (seq (:first_name map))
+    (conj " first_name ILIKE ? ")
 
-                (seq (:address map))
-                (str " TRUE AND address ILIKE '%" (:address map) "%'")
+    (seq (:middle_name map))
+    (conj "middle_name ILIKE ? ")
 
-                (not (nil? (:chi_number map)))
-                (str " TRUE AND chi_number::text ILIKE '%" (:chi_number map) "%'")
+    (seq (:last_name map))
+    (conj "last_name ILIKE ? ")
 
-                (true? true)
-                (str ";"))]
-    (jdbc/execute! ds [query]
-                  {:builder-fn rs/as-unqualified-maps})))
+    (seq (:gender map))
+    (conj "gender ILIKE ? ")
+
+    (seq (:date_of_birth map))
+    (conj "date_of_birth::text LIKE ? ")
+
+    (seq (:address map))
+    (conj "address ILIKE ? ")
+
+    (= 16 (count (:chi_number map)))
+    (conj "chi_number::text ILIKE ? ")
+
+    (true? true)
+    (conj ";")))
+
+(defn- sql-add-end
+  "For some reason map fn doesn't work with subvec fn value if map fn doesn't
+  stated somewhere outside"
+  
+  [sql-args]
+  (map #(str " AND " %) sql-args))
+
+(defn- sql-prepared-query
+  "Initial search query is always comprised of 3 parts: it's a
+  'select * from where' part, then the 'search' (example: 'first_name ILIKE ? ')
+  part, then the semicolon. Anything longer than that needs AND operator in
+  between 'search' parts. This fn subvecs those columns from initial vector and
+  adds AND to them if there's more than 3 parts, then returns the whole
+  statement. Returns query as is otherwise."
+  
+  [query-parts]
+  (if (> (count query-parts) 3)
+    (apply str
+           (conj
+            (into [(first query-parts) (second query-parts)]
+                  (vec (sql-add-end (subvec query-parts 2 (-> (count query-parts)
+                                                              (- 1))))))
+            (last query-parts)))
+    (reduce str query-parts)))
+
+(defn search-records
+  "Dissect argument map with search values into separate parts and smash them
+  together into query with statement and values."
+
+  [map]
+  (let [query-parts (sql-search-parts map)
+        query (sql-prepared-query query-parts)
+        values (sql-search-values map)]
+    (into [] cat [[query] values])))
