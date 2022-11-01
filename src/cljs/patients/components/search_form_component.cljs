@@ -75,8 +75,9 @@
                 handle-change
                 handle-blur
                 handle-submit
-                errors]}]
-     (let [render-error #(when (get errors %)
+                errors
+                touched]}]
+     (let [render-error #(when (and (touched %) (get errors %))
                            [:div
                             {:class "text-red-500"}
                             (get errors %)])]
@@ -153,34 +154,35 @@
                     w-fit"}]]
 
          [:label {:for "gender"}
-           "Gender:"]
-          [:select
-           {:id "gender"
-            :name "gender"
-            :value (values "gender")
-            :on-change handle-change
-            :class "mt-3
-                    mb-3
-                    mr-3
-                    border
-                    border-black
-                    w-fit
-                    bg-white
-                    p-1"}
-           [:option
-            {:selected true
-             :disabled true
-             :value "specify-gender"}
-            "Please specify patient's gender"]
-           [:option
-            {:value "Male"}
-            "Male"]
-           [:option
-            {:value "Female"}
-            "Female"]
-           [:option
-            {:value "Other"}
-            "Other"]]]
+          "Gender:"]
+         [:br]
+         [:select
+          {:id "gender"
+           :name "gender"
+           :value (values "gender")
+           :on-change handle-change
+           :class "mt-3
+                   mb-3
+                   mr-3
+                   border
+                   border-black
+                   w-fit
+                   bg-white
+                   p-1"}
+          [:option
+           {:selected true
+            :disabled true
+            :value "specify-gender"}
+           "Please specify patient's gender"]
+          [:option
+           {:value "Male"}
+           "Male"]
+          [:option
+           {:value "Female"}
+           "Female"]
+          [:option
+           {:value "Other"}
+           "Other"]]]
 
         [:div
          {:class "col-start-2
@@ -227,7 +229,7 @@
                     border-black
                     p-1
                     w-fit"}]
-         
+          
           [:label {:for "chi-number"
                    :class "w-fit"}
            "CHI number:"]
