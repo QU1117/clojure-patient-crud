@@ -75,26 +75,26 @@
   [map]
   (cond->
       []
-    (seq (:first_name map))
+    (not (nil? (:first_name map)))
     (conj (:first_name map))
     
-    (seq (:middle_name map))
+    (not (nil? (:middle_name map)))
     (conj (:middle_name map))
     
-    (seq (:last_name map))
+    (not (nil? (:last_name map)))
     (conj (:last_name map))
     
-    (seq (:gender map))
+    (not (nil? (:gender map)))
     (conj (:gender map))
     
-    (seq (:date_of_birth map))
+    (not (nil? (:date_of_birth map)))
     (conj (:date_of_birth map))
     
-    (seq (:address map))
+    (not (nil? (:address map)))
     (conj (:address map)) 
     
-    (= 16 (count (:chi_number map)))
-    (conj (:chi_number map))))
+    (not (nil? (:chi_number map)))
+    (conj (.toString (:chi_number map)))))
 
 (defn- sql-search-parts
   "Returns vector with SQL query parts based on their presence in argument map"
@@ -105,25 +105,25 @@
     (true? true)
     (conj "SELECT * FROM patients WHERE")
     
-    (seq (:first_name map))
+    (not (nil? (:first_name map)))
     (conj " first_name ILIKE ? ")
 
-    (seq (:middle_name map))
+    (not (nil? (:middle_name map)))
     (conj " middle_name ILIKE ? ")
 
-    (seq (:last_name map))
+    (not (nil? (:last_name map)))
     (conj " last_name ILIKE ? ")
 
-    (seq (:gender map))
+    (not (nil? (:gender map)))
     (conj " gender ILIKE ? ")
 
-    (seq (:date_of_birth map))
+    (not (nil? (:date_of_birth map)))
     (conj " date_of_birth::text LIKE ? ")
 
-    (seq (:address map))
+    (not (nil? (:address map)))
     (conj " address ILIKE ? ")
 
-    (= 16 (count (:chi_number map)))
+    (not (nil? (:chi_number map)))
     (conj " chi_number::text ILIKE ? ")
 
     (true? true)
