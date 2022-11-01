@@ -76,13 +76,13 @@
   (cond->
       []
     (not (nil? (:first_name map)))
-    (conj (:first_name map))
+    (conj (str "%" (:first_name map) "%"))
     
     (not (nil? (:middle_name map)))
-    (conj (:middle_name map))
+    (conj (str "%" (:middle_name map) "%"))
     
     (not (nil? (:last_name map)))
-    (conj (:last_name map))
+    (conj (str "%" (:last_name map) "%"))
     
     (not (nil? (:gender map)))
     (conj (:gender map))
@@ -91,7 +91,7 @@
     (conj (:date_of_birth map))
     
     (not (nil? (:address map)))
-    (conj (:address map)) 
+    (conj (str "%" (:address map) "%")) 
     
     (not (nil? (:chi_number map)))
     (conj (.toString (:chi_number map)))))
