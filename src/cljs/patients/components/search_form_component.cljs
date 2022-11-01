@@ -68,7 +68,9 @@
                   
                   :handler (fn [response]
                              ((reset! results-state response)
-                              (reset! main-container-state results-main-container)))})}
+                              (reset! main-container-state results-main-container)))
+                  :error-handler (fn [_]
+                                   (js/alert "No patients found"))})}
    (fn [{:keys [values
                 handle-change
                 handle-blur
