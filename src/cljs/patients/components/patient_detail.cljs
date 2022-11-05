@@ -61,5 +61,6 @@
              (ajax/DELETE (str "http://localhost:4000/api/patients/"
                                    (:id @detailed-info-state))
                               {:handler
-                               (js/alert "Patient info has been deleted")}))}
+                               (do (reset! modal-state "hidden")
+                                   (js/alert "Patient info has been deleted"))}))}
    "[Delete patient's info]"]])
