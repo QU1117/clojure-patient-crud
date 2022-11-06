@@ -2,9 +2,10 @@
   (:require [fork.reagent :as fork]
             [ajax.core :as ajax]
             [patients.components.main-container :refer [main-container-state]]
-            [patients.components.search-results-list :refer [results-main-container
-                                                             results-state
-                                                             errors]]))
+            [patients.components.patient-list :refer [patient-list-state
+                                                      search-state]]
+            [patients.components.patients-main-container
+             :refer [patients-main-container]]))
 
 (defn validate-search [values]
   (let [first-name    (get values "first-name" "")
@@ -67,8 +68,10 @@
                                     0)}
                   
                   :handler (fn [response]
-                             ((reset! results-state response)
-                              (reset! main-container-state results-main-container)))
+                             ((reset! search-state true)
+                              (reset! patient-list-state response)
+                              (reset! main-container-state
+                                      patients-main-container)))
                   :error-handler (fn [_]
                                    (js/alert "No patients found"))})}
    (fn [{:keys [values
