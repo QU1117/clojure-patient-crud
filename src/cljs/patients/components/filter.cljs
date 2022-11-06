@@ -1,9 +1,5 @@
 (ns patients.components.filter
-  (:require [reagent.core :as r]
-            [patients.components.search-results-list
-             :refer [results-main-container
-                     results-state]]
-            [patients.components.main-container :refer [main-container]]))
+  (:require [reagent.core :as r]))
 
 (def gender-filter-checks (r/atom (set [])))
 (def unfiltered-list-state (r/atom nil))
