@@ -617,6 +617,10 @@ input[type='number']::-webkit-outer-spin-button,
   margin-left: 5rem;
 }
 
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
 .block {
   display: block;
 }
@@ -665,10 +669,6 @@ input[type='number']::-webkit-outer-spin-button,
 
 .flex-col {
   flex-direction: column;
-}
-
-.justify-between {
-  justify-content: space-between;
 }
 
 .justify-items-center {
@@ -739,6 +739,10 @@ input[type='number']::-webkit-outer-spin-button,
 
 .pr-0 {
   padding-right: 0px;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .font-cinzel {
