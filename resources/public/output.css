@@ -667,6 +667,10 @@ input[type='number']::-webkit-outer-spin-button,
   flex-direction: column;
 }
 
+.justify-between {
+  justify-content: space-between;
+}
+
 .justify-items-center {
   justify-items: center;
 }
