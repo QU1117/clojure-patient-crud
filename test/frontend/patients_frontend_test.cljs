@@ -21,6 +21,10 @@
                        (rtl/render)
                        (.container.querySelector "#add-patient-form"))))))
 
+  (testing "Does add patient form have header 'Add patient' above it?"
+    (is (not (nil? (-> rtl/screen
+                       (.getByText "Add patient"))))))
+
   (testing "Is first name input field exists?"
     (is (not (nil? (-> rtl/screen
                        (.getByRole "textbox"
