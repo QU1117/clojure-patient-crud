@@ -156,3 +156,36 @@
     (is (not (nil? (-> (r/as-element [app])
                        (rtl/render)
                        (.container.querySelector "#submit-search-form")))))))
+
+(deftest test-filter-box
+  (testing "Is filter component present on the screen after clicking 'Show all
+            patients' button in the navbar?"
+    (-> (r/as-element [app])
+        (rtl/render)
+        (.getByText "Show all patients")
+        (rtl/fireEvent.click))
+
+    (is (not (nil? (-> (r/as-element [app])
+                       (rtl/render)
+                       (.container.querySelector "#filter-component"))))))
+
+  (testing "Does filter component have checkbox labeled as 'Male'?"
+    (is (=
+         "checkbox"
+         (-> rtl/screen
+             (.getByLabelText "Male")
+             (.-type)))))
+
+  (testing "Does filter component have checkbox labeled as 'Female'?"
+    (is (=
+         "checkbox"
+         (-> rtl/screen
+             (.getByLabelText "Female")
+             (.-type)))))
+
+  (testing "Does filter component have checkbox labeled as 'Other'?"
+    (is (=
+         "checkbox"
+         (-> rtl/screen
+             (.getByLabelText "Other")
+             (.-type))))))
