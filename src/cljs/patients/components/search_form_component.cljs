@@ -263,6 +263,6 @@
                     ml-20
                     p-2
                     "
-            :id "submit-add-form"}
+            :id "submit-search-form"}
            "Submit"]
           [render-error "empty-search-error"]]]]))])
