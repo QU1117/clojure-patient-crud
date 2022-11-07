@@ -11,7 +11,8 @@
     (swap! gender-filter-checks conj value)))
 
 (defn filter-box []
-  [:form {:class "font-cinzel border border-black flex-col p-2 m-2"}
+  [:form {:class "font-cinzel border border-black flex-col p-2 m-2"
+          :id "filter-component"}
    [:p {:class "text-xl p-2"} "Filter"]
    [:hr
     {:class "border-0 h-px bg-gradient-to-r from-transparent via-black mb-4"}]
