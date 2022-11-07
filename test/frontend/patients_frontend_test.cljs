@@ -62,7 +62,6 @@
                        (rtl/render)
                        (.container.querySelector "#submit-add-form")))))))
 
-
 (deftest test-search-form
   (testing "Form for searching patients should be visible after click"
     (-> (r/as-element [app])
@@ -72,4 +71,88 @@
 
     (is (not (nil? (-> (r/as-element [app])
                        (rtl/render)
-                       (.container.querySelector "#search-form")))))))
+                       (.container.querySelector "#search-form"))))))
+
+  (testing "Is first name input field present inside search form?"
+    (is (not (nil? (-> (r/as-element [app])
+                       (rtl/render)
+                       (.container.querySelector "#first-name"))))))
+
+  (testing "Is first name input of type text?"
+    (is (=
+         "text"
+         (-> rtl/screen
+             (.getByLabelText "First name:")
+             (.-type)))))
+
+  (testing "Is middle name input field present inside search form?"
+    (is (not (nil? (-> (r/as-element [app])
+                       (rtl/render)
+                       (.container.querySelector "#middle-name"))))))
+
+  (testing "Is middle name input of type text?"
+    (is (=
+         "text"
+         (-> rtl/screen
+             (.getByLabelText "Middle name:")
+             (.-type)))))
+
+  (testing "Is last name input field present inside search form?"
+    (is (not (nil? (-> (r/as-element [app])
+                       (rtl/render)
+                       (.container.querySelector "#last-name"))))))
+
+  (testing "Is last name input of type text?"
+    (is (=
+         "text"
+         (-> rtl/screen
+             (.getByLabelText "Last name:")
+             (.-type)))))
+
+  (testing "Is gender select field present inside search form?"
+    (is (not (nil? (-> (r/as-element [app])
+                       (rtl/render)
+                       (.container.querySelector "#gender"))))))
+
+  (testing "Is gender select field of type select?"
+    (is (=
+         "select-one"
+         (-> rtl/screen
+             (.getByLabelText "Gender:")
+             (.-type)))))
+
+  (testing "Is input of type date (of birth) present inside search form?"
+    (is (=
+         "date"
+         (-> rtl/screen
+             (.getByLabelText "Date of birth:")
+             (.-type)))))
+
+  (testing "Is address input field present inside search form?"
+    (is (not (nil? (-> (r/as-element [app])
+                       (rtl/render)
+                       (.container.querySelector "#address"))))))
+
+  (testing "Is address input of type text?"
+    (is (=
+         "text"
+         (-> rtl/screen
+             (.getByLabelText "Address:")
+             (.-type)))))
+
+  (testing "Is CHI number input field present inside search form?"
+    (is (not (nil? (-> (r/as-element [app])
+                       (rtl/render)
+                       (.container.querySelector "#chi-number"))))))
+
+  (testing "Is CHI number input of type number?"
+    (is (=
+         "number"
+         (-> rtl/screen
+             (.getByLabelText "CHI number:")
+             (.-type)))))
+
+  (testing "Is submit form button exists?"
+    (is (not (nil? (-> (r/as-element [app])
+                       (rtl/render)
+                       (.container.querySelector "#submit-search-form")))))))
