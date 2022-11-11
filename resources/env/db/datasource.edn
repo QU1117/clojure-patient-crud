@@ -2,4 +2,4 @@
  :dbname "patients"
  :user "postgres"
  :password "postgres"
- :port 6543}
+ :port 5432}
