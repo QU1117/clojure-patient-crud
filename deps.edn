@@ -7,8 +7,7 @@
   ring/ring-mock                    {:mvn/version "0.4.0"}
   aero/aero                         {:mvn/version "1.1.6"}
   migratus/migratus                 {:mvn/version "1.4.4"}
-  jumblerg/ring-cors                {:mvn/version "3.0.0"}
-  karma-reporter/karma-reporter     {:mvn/version "3.1.0"}}
+  jumblerg/ring-cors                {:mvn/version "3.0.0"}}
 
  :paths ["src/clj"]
 
