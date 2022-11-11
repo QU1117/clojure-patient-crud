@@ -31,13 +31,12 @@
                                            :chi_number 9876543210987654})
                           app)))))
 
-(deftest read-and-update-patient-record-by-id-test
-  (testing "Read"
-    (is (= 200 (:status (-> (mock/request :get "/api/patients/1")
-                            app)))))
+(deftest read-patient-record-by-id-test
+  (is (= 200 (:status (-> (mock/request :get "/api/patients/1")
+                          app)))))
 
-  (testing "Update"
-    (is (= 200 (:status (-> (mock/request :patch "/api/patients/1")
+(deftest update-patient-record-by-id-test
+  (is (= 200 (:status (-> (mock/request :patch "/api/patients/1")
                             (mock/json-body {:first_name "Lynn"
                                              :middle_name "Ann"
                                              :last_name "Conway"
@@ -47,7 +46,7 @@
                                            14180 Howard Rd
                                            Concord, Michigan(MI), 49237"
                                              :chi_number 6428269083928614})
-                            app))))))
+                            app)))))
 
 (deftest delete-patient-record-test
   (is (= 200 (:status (-> (mock/request :delete "/api/patients/2")
