@@ -21,7 +21,7 @@
      {:coercion r.coercion/coercion
       :compile reitit.coercion/compile-request-coercers
       :muuntaja m/instance
-      :middleware [[wrap-cors #"http://localhost:8081"]
+      :middleware [[wrap-cors #"*"]
                    format-middleware
                    coerce-request-middleware
                    coerce-response-middleware
