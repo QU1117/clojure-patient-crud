@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: patient-app
+  labels:
+    zone: prod
+    version: v1
+
+spec:
+  containers:
+  - name: clojure-backend
+    image: dimitri21/clojure-patient-backend:main
+    ports:
+    - containerPort: 4000
+
+  - name: cljs-frontend
+    image: dimitri21/clojure-patient-frontend:main
+    ports:
+    - containerPort: 8081
+
+  - name: postgres-db
+    image: dimitri21/postgres-patient-db:main
+    ports:
+    - containerPort: 5432
